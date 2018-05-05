@@ -12,8 +12,8 @@ RUN apt-get install -y python-rosdep python-rosinstall-generator python-wstool p
 # Installation
 RUN mkdir -p ~/catkin_ws
 WORKDIR /root/catkin_ws
-RUN rosinstall_generator perception --rosdistro kinetic --deps --wet-only --tar > kinetic-perception-wet.rosinstall && \
-    wstool init src kinetic-perception-wet.rosinstall
+RUN rosinstall_generator ros_comm --rosdistro kinetic --deps --wet-only --tar > kinetic-ros_comm-wet.rosinstall && \
+    wstool init src kinetic-ros_comm-wet.rosinstall
 ## Resolve Dependencies
 RUN mkdir -p ~/catkin_ws/external_src && \
     cd ~/catkin_ws/external_src && \
@@ -26,9 +26,6 @@ RUN mkdir -p ~/catkin_ws/external_src && \
 
 WORKDIR /root/catkin_ws/
 RUN rosdep install -y --from-paths src --ignore-src --rosdistro kinetic -r --os=debian:jessie
-## Fixed eigen3 cmake error  
-RUN sed -e "/^find_package(Eigen3 REQUIRED)/s/^/#/" -e "/^#find_package(Eigen3 REQUIRED)/afind_package(PkgConfig)\npkg_search_module(Eigen3 REQUIRED eigen3)" -i.bak ./src/geometry/eigen_conversions/CMakeLists.txt
-RUN sed -e "/^find_package(Eigen3 REQUIRED)/s/^/#/" -e "/^#find_package(Eigen3 REQUIRED)/afind_package(PkgConfig)\npkg_search_module(Eigen3 REQUIRED eigen3)" -i.bak ./src/perception_pcl/pcl_ros/CMakeLists.txt
 ## Build
 RUN ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/kinetic -j2
 
