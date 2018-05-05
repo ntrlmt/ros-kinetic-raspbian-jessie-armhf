@@ -30,10 +30,10 @@ RUN rosdep install -y --from-paths src --ignore-src --rosdistro kinetic -r --os=
 RUN sed -e "/^find_package(Eigen3 REQUIRED)/s/^/#/" -e "/^#find_package(Eigen3 REQUIRED)/afind_package(PkgConfig)\npkg_search_module(Eigen3 REQUIRED eigen3)" -i.bak ./src/geometry/eigen_conversions/CMakeLists.txt
 RUN sed -e "/^find_package(Eigen3 REQUIRED)/s/^/#/" -e "/^#find_package(Eigen3 REQUIRED)/afind_package(PkgConfig)\npkg_search_module(Eigen3 REQUIRED eigen3)" -i.bak ./src/perception_pcl/pcl_ros/CMakeLists.txt
 ## Build
-RUN ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/kinetic -j2
+RUN ./src/catkin/bin/catkin_make_isolated --install -DCMAKE_BUILD_TYPE=Release --install-space /opt/ros/kinetic -j8
 
 WORKDIR /root/catkin_ws/src
-RUN /bin/bash -c '. /opt/ros/kinetic/setup.bash; catkin_init_workspace'
+RUN /bin/bash -c '. /opt/ros/kinetic/setup.bash; catkin_init_workspace
 WORKDIR /root/catkin_ws/
 RUN /bin/bash -c '. /opt/ros/kinetic/setup.bash' && \
     echo "source /opt/ros/kinetic/setup.bash" >> ~/.bashrc && \
