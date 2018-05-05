@@ -1,3 +1,3 @@
-# ros-kinetic-perception-raspbian-jessie-armhf
+# ros-kinetic-raspbian-jessie-armhf
 
-[![Build Status](https://travis-ci.org/ntrlmt/ros-kinetic-perception-raspbian-jessie-armhf.svg?branch=latest)](https://travis-ci.org/ntrlmt/ros-kinetic-perception-raspbian-jessie-armhf)
+[![Build Status](https://travis-ci.org/ntrlmt/ros-kinetic-raspbian-jessie-armhf.svg?branch=perception)](https://travis-ci.org/ntrlmt/ros-kinetic-perception-raspbian-jessie-armhf)
